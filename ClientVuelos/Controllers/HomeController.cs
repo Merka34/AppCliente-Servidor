@@ -26,22 +26,21 @@ namespace ClientVuelos.Controllers
 
             try
             {
+                if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                {
+                    throw new ArgumentException("Por favor verifique su conexión a Internet");
+                }
                 vm.ListaVuelos = Registros();
             }
-            catch(HttpRequestException)
+            catch(ArgumentException ae)
             {
                 vm.IdCode = 2;
-                vm.HttpRespuesta = "No se logro conectarse al servidor, revise su conexión a Internet";
+                vm.HttpRespuesta = ae.Message;
             }
-            catch(WebException)
+            catch (Exception ex)
             {
                 vm.IdCode = 2;
-                vm.HttpRespuesta = "No se logro conectarse al servidor, revise su conexión a Internet";
-            }
-            catch (Exception)
-            {
-                vm.IdCode = 2;
-                vm.HttpRespuesta = "No se logro conectarse al servidor, revise su conexión a Internet";
+                vm.HttpRespuesta = ex.Message;
             }
             return View(vm);
         }
@@ -58,14 +57,10 @@ namespace ClientVuelos.Controllers
             {
                 vm = new FormularioViewModel();
             }
-            // vm | (Datos del Vuelo)        MyRegistro = null
-            //    | (Mensaje de informacion) Mensaje = null
             if (vm.MyRegistro == null || string.IsNullOrWhiteSpace(vm.Mensaje))
             {
                 vm.MyRegistro = new Registro { Destino = "", Estado = "", Vuelo = "", Hora = "" };
             }
-            // vm | (Datos del Vuelo)        MyRegistro = Destio="", Estado="", 
-            //    | (Mensaje de informacion) Mensaje = null
             else if (vm.MyRegistro.Destino == null && vm.MyRegistro.Vuelo == null && vm.MyRegistro.Hora == null && vm.MyRegistro.Estado == null)
             {
                 vm.MyRegistro = new Registro { Destino = "", Estado = "", Vuelo = "", Hora = "" };
@@ -78,6 +73,10 @@ namespace ClientVuelos.Controllers
         {
             try
             {
+                if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                {
+                    throw new ArgumentException("Por favor verifique su conexión a Internet");
+                }
                 if (string.IsNullOrWhiteSpace(formJson))
                 {
                     IEnumerable<Registro> registros = Registros();
@@ -97,6 +96,13 @@ namespace ClientVuelos.Controllers
                 }
                 
             }
+            catch (ArgumentException ae)
+            {
+                IndexViewModel vm = new IndexViewModel();
+                vm.IdCode = 2;
+                vm.HttpRespuesta = ae.Message;
+                return RedirectToAction("Index", new { vm });
+            }
             catch (Exception ex)
             {
                 IndexViewModel vm = new IndexViewModel();
@@ -111,6 +117,10 @@ namespace ClientVuelos.Controllers
         {
             try
             {
+                if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                {
+                    throw new ArgumentException("Por favor verifique su conexión a Internet");
+                }
                 IEnumerable<Registro> registros = Registros();
                 Registro reg = registros.FirstOrDefault(x => x.Vuelo == vuelo);
                 if (reg == null)
@@ -118,6 +128,13 @@ namespace ClientVuelos.Controllers
                     return RedirectToAction("Index");
                 }
                 return View(reg);
+            }
+            catch (ArgumentException ae)
+            {
+                IndexViewModel vm = new IndexViewModel();
+                vm.IdCode = 2;
+                vm.HttpRespuesta = ae.Message;
+                return RedirectToAction("Index", new { vm });
             }
             catch (Exception ex)
             {
@@ -139,6 +156,10 @@ namespace ClientVuelos.Controllers
             HttpClient client = new HttpClient(); // Instancia para comunicacion al servidor via HTTP
             try
             {
+                if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                {
+                    throw new ArgumentException("Por favor verifique su conexión a Internet");
+                }
                 Registro reg = new Registro { Hora = Hora, Destino = Destino, Vuelo = Vuelo, Estado = Estado };
                 //Si alguno de los datos es nulo
                 if (string.IsNullOrWhiteSpace(Hora) || string.IsNullOrWhiteSpace(Vuelo) || string.IsNullOrWhiteSpace(Destino) || string.IsNullOrWhiteSpace(Estado))
@@ -242,6 +263,12 @@ namespace ClientVuelos.Controllers
                     default:
                         break;
                 }
+            }
+            catch (ArgumentException ae)
+            {
+                vm.IdCode = 2;
+                vm.HttpRespuesta = ae.Message;
+                return RedirectToAction("Index", new { vm });
             }
             catch (Exception)
             {
