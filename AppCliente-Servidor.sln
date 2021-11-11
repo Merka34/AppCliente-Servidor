@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDPNotifyClient", "UDPNotifyClient\UDPNotifyClient.csproj", "{211D65A6-B1DB-4982-82F2-F5A522A67C9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPNotifyServer", "UDPNotifyServer\UDPNotifyServer.csproj", "{028651DF-364E-4F07-968F-D8CFDF5BDB6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDPNotifyServer", "UDPNotifyServer\UDPNotifyServer.csproj", "{028651DF-364E-4F07-968F-D8CFDF5BDB6F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientVuelos", "ClientVuelos\ClientVuelos.csproj", "{55C034BC-5936-47BF-AD36-B5B2272DE63D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{028651DF-364E-4F07-968F-D8CFDF5BDB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{028651DF-364E-4F07-968F-D8CFDF5BDB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{028651DF-364E-4F07-968F-D8CFDF5BDB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55C034BC-5936-47BF-AD36-B5B2272DE63D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55C034BC-5936-47BF-AD36-B5B2272DE63D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55C034BC-5936-47BF-AD36-B5B2272DE63D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55C034BC-5936-47BF-AD36-B5B2272DE63D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
