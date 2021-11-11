@@ -149,7 +149,7 @@ namespace ClientVuelos.Controllers
 
         [Route("")]
         [HttpPost]
-        public IActionResult Index(string Hora, string Destino, string Vuelo, string Estado, string type)
+        public IActionResult Index(Registro reg, string type)
         {
             HttpResponseMessage respuesta; //Campo en que se almacenara la respuesta del servidor
             IndexViewModel vm = new IndexViewModel(); //Nueva instancia de ViewModel para la vista Index
@@ -160,9 +160,8 @@ namespace ClientVuelos.Controllers
                 {
                     throw new ArgumentException("Por favor verifique su conexión a Internet");
                 }
-                Registro reg = new Registro { Hora = Hora, Destino = Destino, Vuelo = Vuelo, Estado = Estado };
                 //Si alguno de los datos es nulo
-                if (string.IsNullOrWhiteSpace(Hora) || string.IsNullOrWhiteSpace(Vuelo) || string.IsNullOrWhiteSpace(Destino) || string.IsNullOrWhiteSpace(Estado))
+                if (string.IsNullOrWhiteSpace(reg.Hora) || string.IsNullOrWhiteSpace(reg.Vuelo) || string.IsNullOrWhiteSpace(reg.Destino) || string.IsNullOrWhiteSpace(reg.Estado))
                 {
                     FormularioViewModel fvm = new FormularioViewModel();
                     fvm.Mensaje = "No puede dejar campos vacios";
@@ -175,7 +174,7 @@ namespace ClientVuelos.Controllers
                     }
                     else if(type=="PUT") // Si es en la vista Editar
                     {
-                        return RedirectToAction("Editar", new { Vuelo, formJson });
+                        return RedirectToAction("Editar", new { reg.Vuelo, formJson });
                     }
                     else // El usuario cambio el valor
                     {
@@ -204,7 +203,7 @@ namespace ClientVuelos.Controllers
                         if (respuesta.IsSuccessStatusCode)
                         {
                             vm.IdCode = 1;
-                            vm.HttpRespuesta = $"El vuelo {Vuelo} se ha agregado correctamente";
+                            vm.HttpRespuesta = $"El vuelo {reg.Vuelo} se ha agregado correctamente";
                         }
                         else
                         {
@@ -224,7 +223,7 @@ namespace ClientVuelos.Controllers
                         if (respuesta.IsSuccessStatusCode)
                         {
                             vm.IdCode = 1;
-                            vm.HttpRespuesta = $"El vuelo {Vuelo} se ha eliminado correctamente";
+                            vm.HttpRespuesta = $"El vuelo {reg.Vuelo} se ha eliminado correctamente";
                         }
                         else
                         {
@@ -235,11 +234,11 @@ namespace ClientVuelos.Controllers
 
                     case "PUT":
                         vm.ListaVuelos = Registros();
-                        Registro regC = vm.ListaVuelos.FirstOrDefault(x => x.Vuelo == Vuelo);
+                        Registro regC = vm.ListaVuelos.FirstOrDefault(x => x.Vuelo == reg.Vuelo);
                         if (regC==null)
                         {
                             vm.IdCode = 2;
-                            vm.HttpRespuesta = $"El vuelo {Vuelo} no existe";
+                            vm.HttpRespuesta = $"El vuelo {reg.Vuelo} no existe";
                             return View(vm);
                         }
                         HttpRequestMessage requPUT = new HttpRequestMessage
@@ -252,7 +251,7 @@ namespace ClientVuelos.Controllers
                         if (respuesta.IsSuccessStatusCode)
                         {
                             vm.IdCode = 1;
-                            vm.HttpRespuesta = $"El vuelo {Vuelo} se ha actualizado correctamente";
+                            vm.HttpRespuesta = $"El vuelo {reg.Vuelo} se ha actualizado correctamente";
                         }
                         else
                         {
