@@ -7,6 +7,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="50px"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Center" FontSize="30">Quiz de Matematicas</Label>
+        <ListView Grid.Row="1" ItemsSource="{Binding Username}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Margin="3px" BorderThickness="1" BorderBrush="Black">
+                        <TextBlock Margin="5px, 2px" FontSize="20" Text="{Binding .}"></TextBlock>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Command="{Binding IniciarRondaCommand}" Grid.Row="2" FontSize="25" Margin="10px, 3px">Comenzar Partida</Button>
     </Grid>
 </UserControl>

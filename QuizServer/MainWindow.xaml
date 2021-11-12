@@ -4,13 +4,46 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:QuizServer.ViewModels"
+        xmlns:view="clr-namespace:QuizServer.Views"
         xmlns:local="clr-namespace:QuizServer"
-        mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <vm:ServidorViewModel></vm:ServidorViewModel>
     </Window.DataContext>
-    <DockPanel>
-        
-    </DockPanel>
+    <ContentControl>
+        <ContentControl.Style>
+            <Style TargetType="ContentControl">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Vista}" Value="{x:Static view:Ventana.Inicio}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <view:Inicio></view:Inicio>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Vista}" Value="{x:Static view:Ventana.Partida}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <view:Partida></view:Partida>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Vista}" Value="{x:Static view:Ventana.Resultado}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <view:Resultados></view:Resultados>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Vista}" Value="{x:Static view:Ventana.Cierre}">
+                        <Setter Property="Content">
+                            <Setter.Value>
+                                <view:Cierre></view:Cierre>
+                            </Setter.Value>
+                        </Setter>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ContentControl.Style>
+    </ContentControl>
 </Window>

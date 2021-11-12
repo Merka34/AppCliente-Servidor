@@ -6,7 +6,45 @@
              xmlns:local="clr-namespace:QuizServer.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid>
-            
+        <Grid.Resources>
+            <Style TargetType="TextBlock">
+                <Setter Property="FontSize" Value="30px"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            </Style>
+            <Style TargetType="Border">
+                <Setter Property="BorderBrush" Value="Black"></Setter>
+                <Setter Property="BorderThickness" Value="2px"></Setter>
+                <Setter Property="Margin" Value="5px"></Setter>
+                
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.8*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height=".3*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="30px">Calcula el valor de X</Label>
+        <TextBlock Grid.Row="1" FontSize="50px" TextAlignment="Center" Grid.ColumnSpan="2" Text="{Binding Expresion}"></TextBlock>
+        <Border Grid.Row="2" Background="Blue" >
+            <TextBlock Text="{Binding IncA}"></TextBlock>
+        </Border>
+        <Border Grid.Row="2" Grid.Column="1" Background="Green">
+            <TextBlock Text="{Binding IncB}"></TextBlock>
+        </Border>
+        <Border Background="Red" Grid.Row="3">
+            <TextBlock  Text="{Binding IncC}"></TextBlock>
+        </Border>
+        <Border Background="Yellow" Grid.Row="3" Grid.Column="1" >
+            <TextBlock Text="{Binding IncD}"></TextBlock>
+        </Border>
+        <TextBlock Grid.Row="5" Text="{Binding Respuesta}"></TextBlock>
     </Grid>
 </UserControl>
