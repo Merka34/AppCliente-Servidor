@@ -29,9 +29,9 @@
     <h2>Editar Vuelo @Model.MyRegistro.Vuelo</h2>
     <form action="~/" method="post">
         <label>Hora:</label>
-        <input type="text" name="hora" value="@(Model.MyRegistro.Hora)" /><br />
+        <input type="text" name="hora" required value="@(Model.MyRegistro.Hora)" /><br />
         <label>Destino:</label>
-        <input type="text" name="destino" value="@(Model.MyRegistro.Destino)" /><br />
+        <input type="text" name="destino" required value="@(Model.MyRegistro.Destino)" /><br />
         <input hidden type="text" name="vuelo" value="@(Model.MyRegistro.Vuelo)" /><br />
         <label>Estado:</label>
         <select name="estado">

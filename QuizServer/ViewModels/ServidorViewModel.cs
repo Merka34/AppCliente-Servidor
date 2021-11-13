@@ -18,18 +18,19 @@ namespace QuizServer.ViewModels
 {
     public class ServidorViewModel : INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+        HttpListener listener = new HttpListener();
+        Random random = new Random();
+        Dispatcher dispatcher;
+
         private ObservableCollection<string> _username { get; set; } = new ObservableCollection<string>();
         public ObservableCollection<string> Username
         {
             get { return _username; }
             set { _username = value; }
         }
-
-        HttpListener listener = new HttpListener();
-        Random random = new Random();
-        Dispatcher dispatcher;
+        
         private Stopwatch _cronometro { get; set; } = new Stopwatch();
-
         public Stopwatch Cronometro
         {
             get { return _cronometro; }
@@ -53,7 +54,6 @@ namespace QuizServer.ViewModels
         }
 
         private string _expresion;
-
         public string Expresion
         {
             get { return _expresion; }
@@ -65,7 +65,6 @@ namespace QuizServer.ViewModels
         }
 
         private int _incA;
-
         public int IncA
         {
             get { return _incA; }
@@ -77,7 +76,6 @@ namespace QuizServer.ViewModels
         }
 
         private int _incB;
-
         public int IncB
         {
             get { return _incB; }
@@ -89,7 +87,6 @@ namespace QuizServer.ViewModels
         }
 
         private int _incC;
-
         public int IncC
         {
             get { return _incC; }
@@ -101,7 +98,6 @@ namespace QuizServer.ViewModels
         }
 
         private int _incD;
-
         public int IncD
         {
             get { return _incD; }
@@ -113,12 +109,7 @@ namespace QuizServer.ViewModels
         }
 
 
-
-
         private Ventana _view;
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public Ventana Vista
         {
             get => _view;
@@ -187,8 +178,8 @@ namespace QuizServer.ViewModels
             Expresion = "";
             int resultadoTemporal = random.Next(10, 101);
             int posiciones = random.Next(3, 6); //Selecciona la cantidad de variables
-            //int posicionRespues = random.Next(0, posiciones - 1); //Selecciona la posicion del valor a adivinar
-            int posicionRespues = posiciones - 1;
+            int posicionRespues = random.Next(0, posiciones - 1); //Selecciona la posicion del valor a adivinar
+            //int posicionRespues = posiciones - 1;
             string expresionTemp = "";
             if (posicionRespues == posiciones - 1) //Si el valor a adivinar esta posicionado como ultimo seria 3+2=X
             {
@@ -219,7 +210,7 @@ namespace QuizServer.ViewModels
                         }
                     }
                 }
-            }/*
+            }
             else // 7-X=6
             {
                 int resultado = resultadoTemporal;
@@ -233,11 +224,12 @@ namespace QuizServer.ViewModels
                         if (i == posicionRespues)
                         {
                             resultadoTemporal -= x;
-                            Respuesta = x;
+                            expresionTemp += "+X";
+                            Respuesta = x;/*
                             if (i == posiciones - 2)
-                                expresionTemp += "X+" + resultadoTemporal;
+                                expresionTemp += "+X" + resultadoTemporal;
                             else
-                                expresionTemp += "X+";
+                                expresionTemp += "+X";*/
                         }
                         else if (i == posiciones - 2)
                         {
@@ -247,7 +239,7 @@ namespace QuizServer.ViewModels
                         else
                         {
                             resultadoTemporal -= x;
-                            expresionTemp += x + "+";
+                            expresionTemp += "+"+x;
                         }
                     }
                     else
@@ -256,25 +248,27 @@ namespace QuizServer.ViewModels
                         {
                             resultadoTemporal += x;
                             Respuesta = x;
+                            expresionTemp += "-X";
+                            /*
                             if (i == posiciones - 2)
-                                expresionTemp += "X-" + resultadoTemporal;
+                                expresionTemp += "-X" + resultadoTemporal;
                             else
-                                expresionTemp += "X-";
-                        }
+                                expresionTemp += "-X";*/
+                        }/*
                         else if (i == posiciones - 2)
                         {
                             resultadoTemporal += x;
                             expresionTemp += x;
-                        }
+                        }*/
                         else
                         {
                             resultadoTemporal += x;
-                            expresionTemp += x + "-";
+                            expresionTemp += "-"+x; //-
                         }
                     }
                 }
-                Expresion = expresionTemp + "=" + resultado;
-            }*/
+                Expresion = resultadoTemporal + expresionTemp + "=" + resultado;
+            }
         }
         public void GenerarIncisos()
         {
@@ -283,41 +277,134 @@ namespace QuizServer.ViewModels
             {
                 case 0:
                     IncA = Respuesta;
-                    do
+                    if (Respuesta < 11)
                     {
-                        IncB = random.Next(0, 100);
-                        IncC = random.Next(0, 100);
-                        IncD = random.Next(0, 100);
+                        do
+                        {
+                            IncB = random.Next(0, 20);
+                            IncC = random.Next(0, 20);
+                            IncD = random.Next(0, 20);
+                        }
+                        while (IncB == IncC || IncB == IncD || IncC == IncD || IncB == Respuesta || IncC == Respuesta || IncD == Respuesta);
                     }
-                    while (IncB == IncC || IncB==IncD || IncC==IncD);
+                    else if (Respuesta > 89)
+                    {
+                        do
+                        {
+                            IncB = random.Next(80, 100);
+                            IncC = random.Next(80, 100);
+                            IncD = random.Next(80, 100);
+                        }
+                        while (IncB == IncC || IncB == IncD || IncC == IncD || IncB == Respuesta || IncC == Respuesta || IncD == Respuesta);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            IncB = random.Next(Respuesta-10, Respuesta+11);
+                            IncC = random.Next(Respuesta-10, Respuesta+11);
+                            IncD = random.Next(Respuesta-10, Respuesta+11);
+                        }
+                        while (IncB == IncC || IncB == IncD || IncC == IncD || IncB == Respuesta || IncC == Respuesta || IncD == Respuesta);
+                    }
                     break;
                 case 1:
-                    do
+                    IncB = Respuesta;
+                    if (Respuesta < 11)
                     {
-                        IncA = random.Next(0, 100);
-                        IncB = Respuesta;
-                        IncC = random.Next(0, 100);
-                        IncD = random.Next(0, 100);
+                        do
+                        {
+                            IncA = random.Next(0, 20);
+                            IncC = random.Next(0, 20);
+                            IncD = random.Next(0, 20);
+                        }
+                        while (IncA == IncC || IncA == IncD || IncC == IncD || IncA == Respuesta || IncC == Respuesta || IncD == Respuesta);
                     }
-                    while (IncA == IncC|| IncA == IncD || IncC == IncD);
+                    else if (Respuesta > 89)
+                    {
+                        do
+                        {
+                            IncA = random.Next(80, 100);
+                            IncC = random.Next(80, 100);
+                            IncD = random.Next(80, 100);
+                        }
+                        while (IncA == IncC || IncA == IncD || IncC == IncD || IncA == Respuesta || IncC == Respuesta || IncD == Respuesta);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            IncA = random.Next(Respuesta - 10, Respuesta + 11);
+                            IncC = random.Next(Respuesta - 10, Respuesta + 11);
+                            IncD = random.Next(Respuesta - 10, Respuesta + 11);
+                        }
+                        while (IncA == IncC || IncA == IncD || IncC == IncD || IncA == Respuesta || IncC == Respuesta || IncD == Respuesta);
+                    }
                     break;
                 case 2:
-                    do
+                    IncC = Respuesta;
+                    if (Respuesta < 11)
                     {
-                        IncA = random.Next(0, 100);
-                        IncB = random.Next(0, 100);
-                        IncC = Respuesta;
-                        IncD = random.Next(0, 100);
+                        do
+                        {
+                            IncA = random.Next(0, 20);
+                            IncB = random.Next(0, 20);
+                            IncD = random.Next(0, 20);
+                        }
+                        while (IncA == IncB || IncA == IncD || IncB == IncD || IncA == Respuesta || IncB == Respuesta || IncD == Respuesta);
                     }
-                    while (IncA == IncB || IncA == IncD || IncB == IncD);
+                    else if (Respuesta > 89)
+                    {
+                        do
+                        {
+                            IncA = random.Next(80, 100);
+                            IncB = random.Next(80, 100);
+                            IncD = random.Next(80, 100);
+                        }
+                        while (IncA == IncB || IncA == IncD || IncB == IncD || IncA == Respuesta || IncB == Respuesta || IncD == Respuesta);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            IncA = random.Next(Respuesta - 10, Respuesta + 11);
+                            IncB = random.Next(Respuesta - 10, Respuesta + 11);
+                            IncD = random.Next(Respuesta - 10, Respuesta + 11);
+                        }
+                        while (IncA == IncB || IncA == IncD || IncB == IncD || IncA == Respuesta || IncB == Respuesta || IncD == Respuesta);
+                    }
                     break;
                 case 3:
-                    do
+                    IncD = Respuesta;
+                    if (Respuesta < 11)
                     {
-                        IncA = random.Next(0, 100);
-                        IncB = random.Next(0, 100);
-                        IncC = random.Next(0, 100);
-                        IncD = Respuesta;
+                        do
+                        {
+                            IncB = random.Next(0, 20);
+                            IncC = random.Next(0, 20);
+                            IncA = random.Next(0, 20);
+                        }
+                        while (IncB == IncC || IncB == IncA || IncC == IncA || IncB == Respuesta || IncC == Respuesta || IncA == Respuesta);
+                    }
+                    else if (Respuesta > 89)
+                    {
+                        do
+                        {
+                            IncB = random.Next(80, 100);
+                            IncC = random.Next(80, 100);
+                            IncA = random.Next(80, 100);
+                        }
+                        while (IncB == IncC || IncB == IncA || IncC == IncA || IncB == Respuesta || IncC == Respuesta || IncA == Respuesta);
+                    }
+                    else
+                    {
+                        do
+                        {
+                            IncB = random.Next(Respuesta - 10, Respuesta + 11);
+                            IncC = random.Next(Respuesta - 10, Respuesta + 11);
+                            IncA = random.Next(Respuesta - 10, Respuesta + 11);
+                        }
+                        while (IncB == IncC || IncB == IncA || IncC == IncA || IncB == Respuesta || IncC == Respuesta || IncA == Respuesta);
                     }
                     while (IncA == IncB || IncA == IncC || IncB == IncC);
                     break;
@@ -325,5 +412,6 @@ namespace QuizServer.ViewModels
                     break;
             }
         }
+
     }
 }
