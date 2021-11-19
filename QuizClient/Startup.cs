@@ -28,6 +28,7 @@ namespace QuizClient
             }
 
             app.UseRouting();
+            app.UseFileServer();
 
             app.UseEndpoints(endpoints =>
             {

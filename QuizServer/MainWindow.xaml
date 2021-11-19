@@ -6,11 +6,11 @@
         xmlns:vm="clr-namespace:QuizServer.ViewModels"
         xmlns:view="clr-namespace:QuizServer.Views"
         xmlns:local="clr-namespace:QuizServer"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Adivina la variable" Height="520" Width="800" ResizeMode="NoResize">
     <Window.DataContext>
         <vm:ServidorViewModel></vm:ServidorViewModel>
     </Window.DataContext>
-    <ContentControl>
+    <ContentControl >
         <ContentControl.Style>
             <Style TargetType="ContentControl">
                 <Style.Triggers>

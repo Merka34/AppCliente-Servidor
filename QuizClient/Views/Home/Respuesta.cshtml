@@ -1,0 +1,28 @@
+﻿@model QuizClient.Models.Registro
+@{
+    ViewData["Title"] = "Respuesta";
+}
+<head>
+    <meta charset="utf-8" />
+
+    <link href="~/estilos/StyleSheet2.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <div>
+        <h1>Información del envio</h1><br />
+        @if (double.TryParse(Model.Tiempo, out double r))
+        {
+            <p>Tu respuesta del inciso: <b>@Model.Inciso</b> ha enviado con <b>@Model.Tiempo</b> segundos </p>
+        }
+        else
+        {
+            <p id="error">@Model.Tiempo</p>
+        }
+        <form action="~/Home/Respuesta" method="post">
+            <input type="text" name="username" hidden value="@Model.Username" />
+            <input type="submit" value="Volver a jugar" />
+        </form>
+    </div>
+</body>

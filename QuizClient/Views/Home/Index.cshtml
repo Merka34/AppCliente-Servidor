@@ -2,6 +2,23 @@
 @{
     ViewData["Title"] = "Index";
 }
+<head>
+    <meta charset="utf-8" />
 
-<h1>Index</h1>
+    <link href="~/estilos/StyleSheet.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
 
+</head>
+<body>
+    <div>
+        <h1>Bienvenido al juego 🎮</h1>
+        <img src="http://assets.stickpng.com/thumbs/585e4bf3cb11b227491c339a.png" /><br />
+        <label id="error">@Html.ValidationSummary()</label>
+        <form action="~/" method="post">
+            <label>Introduce tus datos</label><br />
+            <label>Nombre de usuario:</label>
+            <input type="text" name="username" required /><br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>

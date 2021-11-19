@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizServer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800" Background="#505050">
 
     <Grid>
         <Grid.Resources>
@@ -25,26 +25,29 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.8*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height=".3*"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="70"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="30px">Calcula el valor de X</Label>
-        <TextBlock Grid.Row="1" FontSize="50px" TextAlignment="Center" Grid.ColumnSpan="2" Text="{Binding Expresion}"></TextBlock>
-        <Border Grid.Row="2" Background="Blue" >
-            <TextBlock Text="{Binding IncA}"></TextBlock>
+        <Label Foreground="White" HorizontalAlignment="Center" Grid.ColumnSpan="2" FontSize="30px">Elige la respuesta que consideras la correcta</Label>
+        <TextBlock Foreground="White" Background="#646464" Grid.Row="1" FontSize="50px" TextAlignment="Center" Grid.ColumnSpan="2" Text="{Binding Expresion}"></TextBlock>
+        <Border Grid.Row="2" Background="#67a1cf" >
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"  >Opción A: <Run Text="{Binding IncA}"></Run></TextBlock>
         </Border>
-        <Border Grid.Row="2" Grid.Column="1" Background="Green">
-            <TextBlock Text="{Binding IncB}"></TextBlock>
+        <Border Grid.Row="2" Grid.Column="1" Background="#00b347">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >Opción B: <Run Text="{Binding IncB}"></Run></TextBlock>
         </Border>
-        <Border Background="Red" Grid.Row="3">
-            <TextBlock  Text="{Binding IncC}"></TextBlock>
+        <Border Background="#ff4040" Grid.Row="3">
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"   >Opción C: <Run Text="{Binding IncC}"></Run></TextBlock>
         </Border>
-        <Border Background="Yellow" Grid.Row="3" Grid.Column="1" >
-            <TextBlock Text="{Binding IncD}"></TextBlock>
+        <Border Background="#ffff40" Grid.Row="3" Grid.Column="1" >
+            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" >Opción D: <Run  Text="{Binding IncD}"></Run></TextBlock>
         </Border>
-        <TextBlock Grid.Row="5" Text="{Binding Respuesta}"></TextBlock>
+
+        <TextBlock Foreground="White" Grid.Row="4" Grid.ColumnSpan="2" TextAlignment="Right" Margin="10px"  >El cronómetro va en: <Run FontWeight="Bold" Text="{Binding Tiempo}"></Run> segundos</TextBlock>
+
+
     </Grid>
 </UserControl>

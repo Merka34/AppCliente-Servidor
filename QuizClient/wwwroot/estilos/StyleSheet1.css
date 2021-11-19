@@ -1,0 +1,77 @@
+﻿body {
+    background-color: gray;
+    margin: auto;
+}
+
+div {
+    margin: auto;
+    width: 50vw;
+    padding: 10px;
+    background: #000000bb;
+}
+
+label {
+    font-size: 20px;
+    margin: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+img {
+    display: block;
+    margin-left: 35%;
+    width: 200px;
+    height: 200px;
+}
+
+h1 {
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: auto;
+    text-align: center;
+}
+
+input[type=submit] {
+    margin-left: 30px;
+    margin: 0, 5px;
+    width: 45vw;
+    height: 50px;
+    background: green;
+    color: white;
+    font-size: 25px;
+    border: 1px solid black;
+}
+
+    input[type=submit]:hover {
+        cursor: pointer;
+        background-color: rgb(0, 187, 0)
+    }
+
+    input[type=submit]:active {
+        cursor: pointer;
+        background-color: rgb(0, 39, 0);
+    }
+
+select {
+    background: lightgreen;
+    text-align: center;
+    margin: 5px;
+    width: 10%;
+    font-size: 30px;
+}
+
+option:nth-child(1) {
+    background: #67a1cf;
+}
+
+option:nth-child(2) {
+    background: #00b347;
+}
+
+option:nth-child(3) {
+    background: #ff4040;
+}
+
+option:nth-child(4) {
+    background: #ffff40;
+}

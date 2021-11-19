@@ -5,8 +5,51 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizServer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+             d:DesignHeight="450" d:DesignWidth="800" Background="#505050">
+    <Grid Margin="10px">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"/>
+            <RowDefinition Height="50px"/>
+            <RowDefinition/>
+            <RowDefinition Height="80px"/>
+        </Grid.RowDefinitions>
+        <TextBlock Foreground="White" HorizontalAlignment="Center" FontSize="30px"><Run Foreground="Yellow" >⚠️</Run>TIEMPO TERMINADO</TextBlock>
+        <WrapPanel HorizontalAlignment="Center" Grid.Row="1">
+            <TextBlock Foreground="White" FontSize="30px" Margin="10px 0 20px 0">La respuesta correcta era la opción:</TextBlock>
+            <TextBlock FontSize="30px" Foreground="LightGreen" Text="{Binding IncCorrecto}"></TextBlock>
+            <TextBlock FontSize="30px" Foreground="LightGreen" Text=") "></TextBlock>
+            <TextBlock FontSize="30px" Foreground="LightGreen" Text="{Binding Respuesta}"></TextBlock>
+        </WrapPanel>
+        <ListView Background="#646464" ItemsSource="{Binding MisRespuestas}" Grid.Row="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel.Resources>
+                            <Style TargetType="StackPanel">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Correcto}" Value="True">
+                                        <Setter Property="Background" Value="#a2c5e2"></Setter>
+                                    </DataTrigger>
+                                   
+                                </Style.Triggers>
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Foreground="White" FontSize="25" >Opción eligida: <Run FontWeight="Bold" Text="{Binding IdRespuesta}" ></Run></TextBlock>
+                        <TextBlock Foreground="White" FontSize="25" >Usuario: <Run FontWeight="Bold" Text="{Binding Username}"></Run></TextBlock>
+                        <TextBlock Foreground="White" FontSize="25" >Tiempo: <Run FontWeight="Bold" Text="{Binding Tiempo}"></Run></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <UniformGrid Grid.Row="3" Columns="2">
+            <UniformGrid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="5px"></Setter>
+                    <Setter Property="FontSize" Value="20"></Setter>
+                </Style>
+            </UniformGrid.Resources>
+            <Button Command="{Binding IniciarRondaCommand}" FontSize="25">🔄 Volver a jugar</Button>
+            <Button Command="{Binding FinalizarPartidaCommand}" >↩️ Finalizar Partida</Button>
+        </UniformGrid>
     </Grid>
 </UserControl>

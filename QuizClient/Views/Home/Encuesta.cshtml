@@ -1,0 +1,31 @@
+﻿@model QuizClient.Models.Registro
+@{
+    ViewData["Title"] = "Encuesta";
+}
+<head>
+    <meta charset="utf-8" />
+
+    <link href="~/estilos/StyleSheet1.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+<body>
+    <div>
+        <h1>¿Cuál es la respuesta?</h1>
+        <img src="http://assets.stickpng.com/images/5a4613eed099a2ad03f9c996.png" />
+        <form action="~/Home/Encuesta" method="post">
+            <label>Estimado @Model.Username elige la respuesta</label>
+            <input type="text" value="@Model.Username" name="username" hidden /><br />
+            <label>Seleccione su inciso: </label>
+            <select name="Inciso">
+                <option selected value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+            </select><br /><br />
+            <input type="submit" />
+        </form>
+    </div>
+</body>
+
+

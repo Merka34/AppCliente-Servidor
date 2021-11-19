@@ -5,28 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizServer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="500" d:DesignWidth="800" Background="#505050">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50px"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="50px"></RowDefinition>
         </Grid.RowDefinitions>
-        <Label HorizontalAlignment="Center" FontSize="30">Quiz de Matematicas</Label>
-        <ListView Grid.Row="1" ItemsSource="{Binding Username}">
+        <Label Foreground="White" HorizontalAlignment="Center" FontWeight="Bold" FontSize="30">¿Crees poder despejar la variable?</Label>
+        <ListView Grid.Row="1" ItemsSource="{Binding Username}" Background="#7d7d7d">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <WrapPanel></WrapPanel>
+                    <UniformGrid Columns="2" ></UniformGrid>
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="3px" BorderThickness="1" BorderBrush="Black">
-                        <TextBlock Margin="5px, 2px" FontSize="20" Text="{Binding .}"></TextBlock>
+                    <Border Margin="3" >
+                        <TextBlock Foreground="White" Margin="5px, 2px" FontSize="20" >El Usuario [<Run Text="{Binding Nombre}"></Run>] se ha conectado</TextBlock>
                     </Border>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Command="{Binding IniciarRondaCommand}" Grid.Row="2" FontSize="25" Margin="10px, 3px">Comenzar Partida</Button>
+        <Button Command="{Binding IniciarRondaCommand}" Grid.Row="2" FontSize="25"  Width="300" Margin="5">Comenzar el juego</Button>
     </Grid>
 </UserControl>

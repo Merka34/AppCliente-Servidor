@@ -5,8 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuizServer.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" Background="#505050">
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px"/>
+            <RowDefinition/>
+            <RowDefinition Height="80px"/>
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="25" FontWeight="Bold" Foreground="White"  HorizontalAlignment="Center">¡Gracias por participar!</TextBlock>
+
+        <ListView Background="#7d7d7d" Grid.Row="1" ItemsSource="{Binding RespuestasFinal}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        
+                        <TextBlock Foreground="White" FontSize="25" >Usuario: <Run Text="{Binding Nombre}"></Run></TextBlock>
+                        <TextBlock  Foreground="White" FontSize="25" >Total de puntos: <Run Text="{Binding Puntos}"></Run></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button FontSize="25"  Width="300" Margin="5" Grid.Row="2" Command="{Binding VerInicioCommand}">↩️ Volver al inicio</Button>
     </Grid>
 </UserControl>
